@@ -1,0 +1,49 @@
+
+.song{
+    text-align: center;
+    color : hsl(0, 0%, 70%);
+}
+.song:hover {
+    color: hsl(0, 0%, 95%);
+}
+.song:active {
+    color: #90aead;
+}
+.footer{
+    text-align: center;
+    display: block;
+    color : hsl(0, 0%, 70%);
+}
+.cite {
+    background-image: url("images/popoutbear.jpg");
+    background-size: cover; /* Ensures the image covers the area */
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 50px;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+.image:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.gif{
+    display: flex;
+    justify-content: center;
+}
+.gif:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.container{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}

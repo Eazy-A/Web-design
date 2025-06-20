@@ -1,0 +1,26 @@
+#container{
+    min(800px, 90%);
+    position: relative;
+}
+.div1{
+    background-color: yellow;
+    position: relative;
+}
+.div2{
+    background-color: green;
+    position: relative;
+    resize: both;
+    overflow: auto;
+}
+.div3{
+    background-color: #f6f5f5;
+    position: absolute;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    margin-top:5%;
+}
+.div3:hover{
+    box-shadow: 10px 10px 10px gray, -10px 10px 10px white;
+    cursor: pointer;
+}

@@ -1,0 +1,36 @@
+h1{
+    text-align: center;
+    color: white;
+    background-color: red;
+    margin : auto;
+}
+
+h2 {
+    margin: auto;
+    background-color: #b6ffea;
+}
+
+.activities {
+    color: green;
+}
+
+.subjects {
+    color: blue;
+}
+
+.time {
+    color: red;
+    text-decoration: underline;
+}
+
+#policy {
+    background-color: #fdb2b2;
+}
+
+#footer {
+    background-color: lightyellow;
+}
+
+.highlight {
+    color: #500950;
+}

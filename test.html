@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #050505;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            height: 56px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+        }
+
+        .logo {
+            flex: 1;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .search-bar {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-container {
+            background-color: #f0f2f5;
+            border-radius: 50px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            width: 100%;
+            max-width: 240px;
+        }
+
+        .search-container i {
+            color: #65676b;
+            margin-right: 8px;
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .nav-icons {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 4px;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background-color: #f0f2f5;
+        }
+
+        .nav-icon.active {
+            color: #1877f2;
+            border-bottom: 3px solid #1877f2;
+            border-radius: 0;
+        }
+
+        .nav-icon.active i {
+            color: #1877f2;
+        }
+
+        .nav-icon i {
+            font-size: 24px;
+            color: #65676b;
+        }
+
+        .profile-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #e4e6eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Main Content */
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding: 20px 16px;
+        }
+
+        /* Left Sidebar */
+        .left-sidebar {
+            width: 280px;
+            padding-right: 16px;
+            position: fixed;
+            height: calc(100vh - 56px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 16px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover {
+            background-color: #e4e6eb;
+        }
+
+        .sidebar-item i {
+            width: 36px;
+            height: 36px;
+            background-color: #e4e6eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+            color: #1877f2;
+        }
+
+        .sidebar-item img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+        }
+
+        .sidebar-item span {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #ced0d4;
+            margin: 8px 0;
+        }
+
+        .shortcuts-header {
+            padding: 16px 8px 8px;
+            color: #65676b;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        /* Feed Content */
+        .feed-content {
+            flex: 1;
+            margin: 0 16px;
+            max-width: 680px;
+        }
+
+        .stories {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .stories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .story {
+            min-width: 110px;
+            height: 200px;
+            border-radius: 8px;
+            margin-right: 8px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .story:last-child {
+            margin-right: 0;
+        }
+
+        .story img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .story:hover img {
+            transform: scale(1.03);
+        }
+
+        .story-user {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #1877f2;
+            overflow: hidden;
+        }
+
+        .story-user img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-create {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffffff;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .story-create i {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1877f2;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            border: 3px solid white;
+        }
+
+        /* Post Creator */
+        .post-creator {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-creator-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .post-creator-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 8px;
+        }
+
+        .post-creator-profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-creator-input {
+            flex: 1;
+            background-color: #f0f2f5;
+            border-radius: 50px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            cursor: pointer;
+        }
+
+        .post-creator-input:hover {
+            background-color: #e4e6eb;
+        }
+
+        .post-creator-input span {
+            color: #65676b;
+            font-size: 15px;
+        }
+
+        .post-creator-divider {
+            height: 1px;
+            background-color: #ced0d4;
+            margin-bottom: 8px;
+        }
+
+        .post-creator-options {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .post-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .post-option:hover {
+            background-color: #f0f2f5;
+        }
+
+        .post-option i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .post-option span {
+            font-size: 15px;
+            font-weight: 500;
+            color: #65676b;
+        }
+
+        .live-video i {
+            color: #f3425f;
+        }
+
+        .photo-video i {
+            color: #45bd62;
+        }
+
+        .feeling i {
+            color: #f7b928;
+        }
+
+        /* Posts */
+        .post {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .post-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 8px;
+        }
+
+        .post-profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-info {
+            flex: 1;
+        }
+
+        .post-author {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .post-time {
+            color: #65676b;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-time i {
+            margin-left: 4px;
+            font-size: 12px;
+        }
+
+        .post-menu {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .post-menu:hover {
+            background-color: #f0f2f5;
+        }
+
+        .post-content {
+            margin-bottom: 12px;
+        }
+
+        .post-text {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .post-image img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ced0d4;
+            color: #65676b;
+            font-size: 15px;
+        }
+
+        .post-stat {
+            display: flex;
+            align-items: center;
+        }
+
+        .post-stat i {
+            margin-right: 4px;
+            font-size: 18px;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            justify-content: center;
+            color: #65676b;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .post-action:hover {
+            background-color: #f0f2f5;
+        }
+
+        .post-action i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .post-action.liked {
+            color: #1877f2;
+        }
+
+        .post-action.liked i {
+            color: #1877f2;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 280px;
+            padding-left: 16px;
+            position: fixed;
+            right: 16px;
+            height: calc(100vh - 56px);
+            overflow-y: auto;
+        }
+
+        .sponsored {
+            margin-bottom: 16px;
+        }
+
+        .sponsored-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            color: #65676b;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .sponsored-item {
+            display: flex;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .sponsored-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .sponsored-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sponsored-info {
+            flex: 1;
+        }
+
+        .sponsored-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .sponsored-url {
+            color: #65676b;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .sponsored-text {
+            font-size: 13px;
+            color: #65676b;
+        }
+
+        .birthdays {
+            margin-bottom: 16px;
+        }
+
+        .birthdays-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            color: #65676b;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .birthday-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .birthday-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #e7f3ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            color: #1877f2;
+            font-size: 18px;
+        }
+
+        .birthday-text {
+            font-size: 15px;
+        }
+
+        .birthday-text span {
+            font-weight: 600;
+        }
+
+        .contacts {
+            margin-bottom: 16px;
+        }
+
+        .contacts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            color: #65676b;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 4px;
+        }
+
+        .contact-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .contact-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #31a24c;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border: 2px solid #ffffff;
+        }
+
+        .contact-profile {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 8px;
+            position: relative;
+        }
+
+        .contact-profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contact-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 1099px) {
+            .right-sidebar {
+                display: none;
+            }
+
+            .feed-content {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 899px) {
+            .left-sidebar {
+                display: none;
+            }
+
+            .feed-content {
+                margin-left: 0;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <img src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="Facebook Logo">
+        </div>
+
+        <div class="search-bar">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Facebook">
+            </div>
+        </div>
+
+        <div class="nav-icons">
+            <a href="#" class="nav-icon active">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="#" class="nav-icon">
+                <i class="fas fa-tv"></i>
+            </a>
+            <a href="#" class="nav-icon">
+                <i class="fas fa-store"></i>
+            </a>
+            <a href="#" class="nav-icon">
+                <i class="fas fa-users"></i>
+            </a>
+            <a href="#" class="nav-icon">
+                <i class="fas fa-gamepad"></i>
+            </a>
+        </div>
+
+        <div class="nav-icons">
+            <div class="nav-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="nav-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="nav-icon">
+                <div class="profile-icon">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="main-container">
+    <!-- Left Sidebar -->
+    <div class="left-sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-item">
+                <div class="profile-icon">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile">
+                </div>
+                <span>John Doe</span>
+            </div>
+
+            <div class="sidebar-item">
+                <i class="fas fa-user-friends"></i>
+                <span>Friends</span>
+            </div>
+
+            <div class="sidebar-item">
+                <i class="fas fa-clock"></i>
+                <span>Memories</span>
+            </div>
+
+            <div class="sidebar-item">
+                <i class="fas fa-bookmark"></i>
+                <span>Saved</span>
+            </div>
+
+            <div class="sidebar-item">
+                <i class="fas fa-flag"></i>
+                <span>Pages</span>
+            </div>
+
+            <div class="sidebar-item">
+                <i class="fas fa-chevron-down"></i>
+                <span>See More</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="sidebar-section">
+            <div class="shortcuts-header">Your Shortcuts</div>
+
+            <div class="sidebar-item">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Group">
+                <span>Family Group</span>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Group">
+                <span>College Friends</span>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Group">
+                <span>Work Colleagues</span>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Group">
+                <span>Gaming Buddies</span>
+            </div>
+
+            <div class="sidebar-item">
+                <i class="fas fa-chevron-down"></i>
+                <span>See More</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feed Content -->
+    <div class="feed-content">
+        <!-- Stories -->
+        <div class="stories">
+            <div class="story">
+                <img src="https://source.unsplash.com/random/200x300?nature" alt="Story">
+                <div class="story-user">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                </div>
+                <div class="story-create">
+                    <i class="fas fa-plus"></i>
+                    <span>Create Story</span>
+                </div>
+            </div>
+
+            <div class="story">
+                <img src="https://source.unsplash.com/random/200x300?city" alt="Story">
+                <div class="story-user">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                </div>
+                <div class="story-create">
+                    <span>Sarah Smith</span>
+                </div>
+            </div>
+
+            <div class="story">
+                <img src="https://source.unsplash.com/random/200x300?beach" alt="Story">
+                <div class="story-user">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User">
+                </div>
+                <div class="story-create">
+                    <span>Mike Johnson</span>
+                </div>
+            </div>
+
+            <div class="story">
+                <img src="https://source.unsplash.com/random/200x300?mountain" alt="Story">
+                <div class="story-user">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User">
+                </div>
+                <div class="story-create">
+                    <span>Emily Davis</span>
+                </div>
+            </div>
+
+            <div class="story">
+                <img src="https://source.unsplash.com/random/200x300?animal" alt="Story">
+                <div class="story-user">
+                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="User">
+                </div>
+                <div class="story-create">
+                    <span>David Wilson</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Creator -->
+        <div class="post-creator">
+            <div class="post-creator-top">
+                <div class="post-creator-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile">
+                </div>
+                <div class="post-creator-input">
+                    <span>What's on your mind, John?</span>
+                </div>
+            </div>
+
+            <div class="post-creator-divider"></div>
+
+            <div class="post-creator-options">
+                <div class="post-option live-video">
+                    <i class="fas fa-video"></i>
+                    <span>Live Video</span>
+                </div>
+                <div class="post-option photo-video">
+                    <i class="fas fa-images"></i>
+                    <span>Photo/Video</span>
+                </div>
+                <div class="post-option feeling">
+                    <i class="fas fa-smile"></i>
+                    <span>Feeling/Activity</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts -->
+        <div class="post" id="post1">
+            <div class="post-header">
+                <div class="post-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile">
+                </div>
+                <div class="post-info">
+                    <div class="post-author">Sarah Smith</div>
+                    <div class="post-time">
+                        <span>2 hrs ago</span>
+                        <i class="fas fa-globe-europe"></i>
+                    </div>
+                </div>
+                <div class="post-menu">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <div class="post-text">
+                    Just got back from an amazing vacation in Hawaii! The beaches were incredible and the sunsets were breathtaking. Can't wait to go back someday!
+                </div>
+                <div class="post-image">
+                    <img src="https://source.unsplash.com/random/600x400?hawaii" alt="Hawaii">
+                </div>
+            </div>
+
+            <div class="post-stats">
+                <div class="post-stat">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>245</span>
+                </div>
+                <div class="post-stat">
+                    <span>48 comments</span>
+                    <span>·</span>
+                    <span>12 shares</span>
+                </div>
+            </div>
+
+            <div class="post-actions">
+                <div class="post-action like-button" onclick="toggleLike('post1')">
+                    <i class="far fa-thumbs-up"></i>
+                    <span>Like</span>
+                </div>
+                <div class="post-action">
+                    <i class="far fa-comment"></i>
+                    <span>Comment</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="post" id="post2">
+            <div class="post-header">
+                <div class="post-profile">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Profile">
+                </div>
+                <div class="post-info">
+                    <div class="post-author">Mike Johnson</div>
+                    <div class="post-time">
+                        <span>5 hrs ago</span>
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                </div>
+                <div class="post-menu">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <div class="post-text">
+                    Check out this awesome new recipe I tried today! Homemade pasta from scratch with a creamy mushroom sauce. It turned out better than I expected!
+                </div>
+                <div class="post-image">
+                    <img src="https://source.unsplash.com/random/600x400?pasta" alt="Pasta">
+                </div>
+            </div>
+
+            <div class="post-stats">
+                <div class="post-stat">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>132</span>
+                </div>
+                <div class="post-stat">
+                    <span>28 comments</span>
+                    <span>·</span>
+                    <span>5 shares</span>
+                </div>
+            </div>
+
+            <div class="post-actions">
+                <div class="post-action like-button" onclick="toggleLike('post2')">
+                    <i class="far fa-thumbs-up"></i>
+                    <span>Like</span>
+                </div>
+                <div class="post-action">
+                    <i class="far fa-comment"></i>
+                    <span>Comment</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="post" id="post3">
+            <div class="post-header">
+                <div class="post-profile">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Profile">
+                </div>
+                <div class="post-info">
+                    <div class="post-author">Emily Davis</div>
+                    <div class="post-time">
+                        <span>Yesterday at 3:45 PM</span>
+                        <i class="fas fa-globe-europe"></i>
+                    </div>
+                </div>
+                <div class="post-menu">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <div class="post-text">
+                    Just finished reading "The Midnight Library" by Matt Haig. Such an incredible book that makes you reflect on life's choices and possibilities. Highly recommend it to everyone!
+                </div>
+            </div>
+
+            <div class="post-stats">
+                <div class="post-stat">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>89</span>
+                </div>
+                <div class="post-stat">
+                    <span>15 comments</span>
+                    <span>·</span>
+                    <span>3 shares</span>
+                </div>
+            </div>
+
+            <div class="post-actions">
+                <div class="post-action like-button" onclick="toggleLike('post3')">
+                    <i class="far fa-thumbs-up"></i>
+                    <span>Like</span>
+                </div>
+                <div class="post-action">
+                    <i class="far fa-comment"></i>
+                    <span>Comment</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="right-sidebar">
+        <div class="sponsored">
+            <div class="sponsored-header">
+                <span>Sponsored</span>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+
+            <div class="sponsored-item">
+                <div class="sponsored-image">
+                    <img src="https://source.unsplash.com/random/200x200?product" alt="Product">
+                </div>
+                <div class="sponsored-info">
+                    <div class="sponsored-title">Amazing Wireless Headphones</div>
+                    <div class="sponsored-url">shop.example.com</div>
+                    <div class="sponsored-text">Premium sound quality with noise cancellation. Limited time offer!</div>
+                </div>
+            </div>
+
+            <div class="sponsored-item">
+                <div class="sponsored-image">
+                    <img src="https://source.unsplash.com/random/200x200?travel" alt="Travel">
+                </div>
+                <div class="sponsored-info">
+                    <div class="sponsored-title">Summer Vacation Deals</div>
+                    <div class="sponsored-url">travel.example.com</div>
+                    <div class="sponsored-text">Book your dream vacation now and save up to 40%!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="birthdays">
+            <div class="birthdays-header">
+                <span>Birthdays</span>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+
+            <div class="birthday-item">
+                <div class="birthday-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="birthday-text">
+                    <span>David Wilson</span> and <span>2 others</span> have birthdays today.
+                </div>
+            </div>
+        </div>
+
+        <div class="contacts">
+            <div class="contacts-header">
+                <span>Contacts</span>
+                <div>
+                    <i class="fas fa-video"></i>
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile">
+                    <div class="contact-status"></div>
+                </div>
+                <div class="contact-name">Sarah Smith</div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-profile">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Profile">
+                    <div class="contact-status"></div>
+                </div>
+                <div class="contact-name">Mike Johnson</div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-profile">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Profile">
+                    <div class="contact-status"></div>
+                </div>
+                <div class="contact-name">Emily Davis</div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-profile">
+                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Profile">
+                    <div class="contact-status"></div>
+                </div>
+                <div class="contact-name">David Wilson</div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-profile">
+                    <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="Profile">
+                    <div class="contact-status"></div>
+                </div>
+                <div class="contact-name">Jennifer Brown</div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-profile">
+                    <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Profile">
+                    <div class="contact-status"></div>
+                </div>
+                <div class="contact-name">Robert Taylor</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Toggle like on posts
+    function toggleLike(postId) {
+        const post = document.getElementById(postId);
+        const likeButton = post.querySelector('.like-button');
+        const likeIcon = likeButton.querySelector('i');
+        const likeText = likeButton.querySelector('span');
+        const likeCount = post.querySelector('.post-stat span');
+
+        if (likeButton.classList.contains('liked')) {
+            // Unlike
+            likeButton.classList.remove('liked');
+            likeIcon.classList.replace('fas', 'far');
+            likeText.textContent = 'Like';
+            likeCount.textContent = parseInt(likeCount.textContent) - 1;
+        } else {
+            // Like
+            likeButton.classList.add('liked');
+            likeIcon.classList.replace('far', 'fas');
+            likeText.textContent = 'Liked';
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+        }
+    }
+
+    // Simulate story clicks
+    const stories = document.querySelectorAll('.story');
+    stories.forEach(story => {
+        story.addEventListener('click', () => {
+            // In a real app, this would open the story viewer
+            alert('Story opened!');
+        });
+    });
+
+    // Simulate post menu clicks
+    const postMenus = document.querySelectorAll('.post-menu');
+    postMenus.forEach(menu => {
+        menu.addEventListener('click', () => {
+            // In a real app, this would open a dropdown menu
+            alert('Post options menu opened!');
+        });
+    });
+</script>
+    // Simulate comment button clicks

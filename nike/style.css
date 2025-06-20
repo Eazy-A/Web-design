@@ -1,0 +1,21 @@
+.nav-bar{
+    position: relative;
+}
+header ul li{
+    padding: 1%;
+}
+header ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+header img{
+    width: 5%;
+    margin-bottom: -5%;
+}
+header .user-controls{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: -3.4%;
+}

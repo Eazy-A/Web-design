@@ -1,0 +1,66 @@
+.font_test{
+    text-shadow: -3px 4px 2px gray;
+    box-shadow:-3px 4px 2px gray;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+}
+.sticky{
+    background-color: blue;
+    display: inline-block;
+    position: fixed;
+}
+::selection{
+  background-color:purple;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.author{
+    display: block;
+}
+.foot{
+    text-align: right;
+}
+thead{
+    background: #4e7fa9;
+    color: white;
+}
+td{
+    border: 1px solid black;
+}
+.align{
+    text-align: right;
+}
+.highlight{
+    color: #4e7fa9;
+}
+.shadow{
+    background-color: #e1e1e1;
+}
+/*table*/
+#name{
+    margin: 3px;
+}
+#email{
+    margin: 3px;
+
+}
+form{
+    border: 1px solid black;
+    margin: 20px;
+    width: 500px;
+    padding: 10px;
+}
+

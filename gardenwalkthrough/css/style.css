@@ -1,0 +1,212 @@
+*{
+	margin: 0;
+	padding: 0;
+	/*border: 1px solid gray;*/
+}
+body{
+	background: url('../images/bg-body.jpg')
+}
+#page{
+	margin: auto;
+	width: 900px;
+	background: green;
+	padding: 10px;
+}
+#logo{
+	background: white;
+	margin-top: -10px;
+	padding: 10px;
+}
+.current{
+	background: green;
+}
+#header a{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#header ul{
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	background: url('../images/bg-description.png')!important;
+	li{
+		list-style: none;
+		flex: 1;
+		a{
+			text-decoration: none;
+			color: #adad3a;
+			padding: 10px;
+		}
+	}
+	li:hover{
+		background: #50bd50;
+	}
+	ul {
+		display: none;
+	}
+	li:hover ul{
+		display: inline-block;
+		position: absolute;
+		width: 142px;
+		padding: 3px;
+	}
+}
+
+#body div.header div {
+	position: relative;
+}
+#body div.header div div {
+	background: url(../images/bg-description.png) repeat-x;
+	height: 75px;
+	bottom: 2px;
+	position: absolute;
+	padding: 17px 20px;
+	width: 860px;
+}
+.header ul {
+	display: flex;
+	li{
+		display: flex;
+		list-style: none;
+		h3{
+			display: flex;
+			float: right;
+			a{
+				color: #adad3a;
+				text-decoration: none;
+			}
+		}
+		p{
+			color: white;
+		}
+	}
+}
+.body{
+	padding-top: 10px;
+	background: white;
+	h1{
+		background: url('../images/interface.png') no-repeat;
+		background-size: 140%;
+		background-position: 0px 0px;
+		width: 800px;
+		margin-left: 50px;
+	}
+	ul{
+		display: flex;
+		padding: 15px;
+		gap: 15px;
+		li{
+			list-style: none;
+			h2{
+				color: #adad3a;
+			}
+		}
+	}
+}
+.footer {
+	display: flex;
+	background: white;
+}
+.footer img{
+	padding: 20px;
+}
+.footer > div{
+	h1{
+		background: url('../images/interface.png') no-repeat;
+		background-size: 200%;
+		background-position: 0px 0px;
+		width: 500px;
+		margin-left: 10px;
+		padding-left: 10px;
+		color: #adad3a;
+	}
+	ol{
+		margin-top: 20px;
+		padding: 10px;
+		padding-left: 30px;
+		li {
+			color: gray;
+		}
+	}
+}
+#footer > div{
+	background: url('../images/interface.png') no-repeat;
+	background-size: 300%;
+	background-position: center;
+	height: 180px;
+	display: flex;
+	justify-content: center;
+	flex:1;
+	gap: 25px;
+	>div h1{
+		padding-top: 10px;
+		color: gray;
+	}
+	>div ul {
+		padding-top: 10px;
+		li {
+			list-style: none;
+
+			a {
+				text-decoration: none;
+				color: gray;
+			}
+		}
+	}
+	div:nth-child(4){
+		display: flex;
+		flex-direction: column;
+		#mail{
+			background: url('../images/icons.png') no-repeat;
+			background-position: 0px 1px;
+			width: 94px;
+			height: 0;
+			padding: 8px;
+			margin-bottom: 10px;
+		}
+		#facebook{
+			background: url(../images/icons.png) no-repeat;
+			background-position: 0px -38px;
+			width: 94px;
+			height: 5px;
+			padding: 8px;
+			margin-bottom: 10px;
+		}
+		#twitter{
+			background: url('../images/icons.png') no-repeat;
+			background-position: 0px -85px;
+			width: 94px;
+			height: 5px;
+			padding: 8px;
+			margin-bottom: 10px;
+		}
+		#googleplus{
+			background: url('../images/icons.png') no-repeat;
+			background-position: 0px -134px;
+			width: 94px;
+			height: 5px;
+			padding: 8px;
+			margin-bottom: 10px;
+		}
+		a{
+			text-decoration: none;
+			color: gray;
+			padding-left: 33px !important;
+		}
+	}
+}
+#footer div div:nth-child(n + 2){
+	background: url('../images/separator1.png') repeat-y;
+	padding: 10px;
+}
+#footer div>div{
+	padding: 10px;
+}
+#footer > p{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	padding: 5px;
+}

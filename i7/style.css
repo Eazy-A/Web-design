@@ -1,0 +1,61 @@
+.chicken{
+    position: relative;
+    z-index: 1;
+}
+.tralalero{
+    position: absolute;
+    z-index: 2;
+    opacity: 0.8;
+    top: 200px;
+    left: 190px;
+}
+.tralalero:hover{
+    opacity: 1;
+}
+.chickentest{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: url(tralalero.jpg);
+    background-repeat: repeat;
+    background-size: 45%;
+    background-position: -15px -50px;
+    border: 5px solid black;
+}
+.green_bar{
+    background-color: #67e167;
+    display: flex;
+    align-items: center;
+    padding-left: 64px;
+    background-image: url("tick.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-blend-mode: multiply;
+    letter-spacing: 3px;
+}
+.green_bar:hover{
+    background-color: #9ee89e;
+    cursor: pointer;
+}
+.row .grid{
+    margin: auto;
+    padding: 16px;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 2rem;
+    align-items: start;
+}
+.row .grid p:nth-child(n){
+    color: white;
+    text-transform: uppercase;
+}
+.row{
+    background: #0606a6;
+    background: radial-gradient( #51bba4, #3388c8);
+}
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Types</title>
+    <style>
+        .block {
+            display: block;
+            background: lightblue;
+            width: 200px;
+            /* height not specified → grows with content */
+        }
+
+        .inline {
+            display: inline;
+            background: lightgreen;
+            width: 200px;  /* ❌ will be ignored */
+            height: 100px; /* ❌ will be ignored */
+        }
+
+        .inline-block {
+            display: inline-block;
+            background: pink;
+            width: 200px;
+            height: 100px;
+        }
+
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Block Element</h2>
+<div class="block">This is a block element. It stretches 200px wide and auto height.</div>
+
+<h2>Inline Element</h2>
+<span class="inline">This is an inline element.</span> ← Text wraps right next to it
+
+<h2>Inline-block Element</h2>
+<span class="inline-block">This is inline-block. Width and height work here.</span>
+
+</body>
+</html>
+    

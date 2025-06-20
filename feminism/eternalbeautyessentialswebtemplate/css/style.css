@@ -1,0 +1,266 @@
+*{
+	/*border: 1px solid gray;*/
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: pink;
+}
+#page{
+	margin: auto;
+	background: url('../images/bg-contentbox.png');
+	width: 1200px;
+}
+#header #navigation ul{
+	display: flex;
+	justify-content: center;
+	li{
+		padding: 10px;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		flex:1;
+		a{
+			text-decoration: none;
+			text-transform: uppercase;
+			color: gray;
+			font-weight: bold;
+			display: inline-block;
+			width: 110px;
+			text-align: center;
+		}
+		a:hover{
+			color: pink;
+		}
+		background: url('../sprites/bg-strips/bg-navigation.png');
+	}
+}
+#header #logo{
+	a{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+#contents {
+	display: flex;
+	flex-direction: row-reverse;
+	margin: auto;
+}
+
+#sidebar>div:first-child {
+	background: url(../images/frames.png) repeat-y;
+	background-size: cover;
+	background-position: -146px -64px;
+	padding: 50px;
+	margin: 10px;
+	margin-left: 0px;
+	a {
+		text-decoration: none;
+		color: black;
+		font-weight: bold;
+		float: left;
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		padding-right: 10px;
+	}
+	span {
+		float: right;
+		margin-left: 10px;
+		background: url('../images/bg-contentbox.png') repeat-y;
+		padding-left: 15px;
+	}
+	display: flex;
+}
+
+#main{
+	display: flex;
+	flex-direction: column;
+}
+#promotions{
+	display: flex;
+	flex-direction: row;
+	margin: 69px;
+	gap: 10px;
+	margin-top: 0px;
+	.poster{
+		display: flex;
+		img{
+			margin-right: 10px;
+		}
+	}
+	ul{
+		display: flex;
+	}
+	li{
+		padding: 10px;
+		list-style: none;
+		a{
+			color: violet;
+			font-weight: bold;
+			text-decoration: none;
+			text-transform: uppercase;
+		}
+		span{
+			margin-top: -10px;
+			color: white;
+		}
+		h2{
+			color: pink;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+		p{
+			color: white;
+		}
+		img{
+			border: 8px solid white;
+			margin: 17px;
+		}
+	}
+}
+#sidebar{
+	margin-right: -16px;
+	.news ul{
+		li{
+			list-style: none;
+			background: url(../sprites/frames/frame.png) no-repeat;
+			background-size: cover;
+			background-position: -8px -2px;
+			a{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				text-decoration:none;
+				color: pink;
+			}
+		}
+	}
+	.news h2{
+		background: url(../images/frames.png) repeat-y;
+		background-position: -103px 0px;
+		padding: 10px;
+		margin-right: 5px;
+	}
+}
+#sidebar{
+	margin-left: 20px;
+	.box ul{
+		li{
+			list-style: none;
+			background: black;
+			background-size: cover;
+			background-position: -8px -2px;
+			border: 0.2px solid gray;
+			a{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				text-decoration:none;
+				color: pink;
+			}
+		}
+	}
+	.box h2{
+		margin-top: 20px;
+		background: linear-gradient(#b2b2b2, black 30%);
+		background-position: 0px 0px;
+		padding: 10px;
+		color: gray;
+	}
+}
+#footer{
+	ul{
+		display: flex;
+		justify-content: center;
+		padding: 20px;
+		li{
+			padding: 15px;
+			list-style: none;
+			color:gray;
+			a{
+				text-decoration: none;
+			}
+			a:after{
+				 content: ' |';
+			 }
+			:hover{
+	color: pink;
+}
+}
+}
+p{
+	display: flex;
+	justify-content: center;
+}
+}
+.sidebar{
+	display: flex;
+	flex-direction: column;
+	flex:1;
+	h2{
+		padding: 20px;
+		color: gray;
+	}
+	a{
+		text-decoration: none;
+		padding: 10px;
+		color: gray;
+	}
+	p{
+		padding: 10px;
+		color: gray;
+	}
+}
+#updates{
+	display: flex;
+	flex-direction: column;
+	margin-left: 30px;
+	flex:2;
+	h2{
+		color: gray;
+		background: linear-gradient(#b2b2b2, black 30%);
+	}
+	ul{
+		display: flex;
+		flex-direction: column;
+		li{
+			display: flex;
+			flex-direction: column;
+			padding: 10px;
+			h4{
+				color: pink;
+			}
+			a{
+				text-decoration: none;
+				color: #bf12bf;
+			}
+			p{
+				color: gray;
+				margin-left: 200px;
+			}
+			div{
+				align-self: center;
+				margin-left: 100px;
+			}
+			img{
+				margin-bottom: -96px;
+				margin-left: 27px;
+			}
+
+		}
+	}
+}
+#main {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	flex-direction: row-reverse;
+}
+#main > :not(#promotions) {
+	flex: 1;
+	min-width: 300px;
+}
