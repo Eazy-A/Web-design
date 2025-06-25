@@ -1,469 +1,263 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+const gallery = document.getElementById('gallery');
+
+// img
+const imageFilenames = [
+  'after_doingBussines.jpg',
+  'bussines_linkup_with_tonevbros.jpg',
+  'bussines_nbaStar.jpg',
+  'bussines_hari.jpg',
+  'bussines_dinner_with_bros.jpg',
+  'official_wbro.jpg',
+];
+gallery.innerHTML = '';
+imageFilenames.forEach(filename => {
+  const container = document.createElement('div');
+  container.className = 'gallery-img-container';
+  const img = document.createElement('img');
+  img.src = `images/${filename}`;
+  img.alt = filename.split('.')[0].replace(/_/g, ' ');
+  const hoverText = document.createElement('div');
+  hoverText.className = 'gallery-hover-text';
+  hoverText.textContent = 'Click for details';
+  container.appendChild(img);
+  container.appendChild(hoverText);
+  container.addEventListener('click', () => {
+    detailImg.src = img.src;
+    detailImg.alt = img.alt;
+    detailDesc.textContent = imageDescriptions[img.src.split('/').pop()] || '';
+    imageDetailSection.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+  gallery.appendChild(container);
+});
+// desc
+const imageDescriptions = {
+  'after_doingBussines.jpg': 'After making a huge business deal with partners',
+  'bussines_linkup_with_tonevbros.jpg': 'Occasional business linkup with friends',
+  'bussines_nbaStar.jpg': 'Business with future promising NBA star',
+  'bussines_hari.jpg': 'Networking with a friend who is a drink service specialist',
+  'bussines_dinner_with_bros.jpg': 'Late night dinner with potential partners',
+  'official_wbro.jpg': 'Entering a huge business gathering',
+};
+const imageDetailSection = document.getElementById('image-detail');
+const detailImg = document.getElementById('detail-img');
+const detailDesc = document.getElementById('detail-desc');
+const closeDetailBtn = document.getElementById('close-detail');
+
+closeDetailBtn.addEventListener('click', () => {
+  imageDetailSection.style.display = 'none';
+  detailImg.src = '';
+  detailDesc.textContent = '';
+  document.body.style.overflow = '';
+});
+// doggo
+const dogGallery = document.getElementById('dog-gallery-images');
+const dogImages = [
+  'doggo1.jpg',
+  'doggo2.jpg',
+];
+const dogDescriptions = {
+  'doggo1.jpg': 'Just my dog',
+  'doggo2.jpg': 'Just my dog pt2',
+};
+dogGallery.innerHTML = '';
+dogImages.forEach(filename => {
+  const container = document.createElement('div');
+  container.className = 'gallery-img-container';
+  const img = document.createElement('img');
+  img.src = `images/${filename}`;
+  img.alt = filename.split('.')[0].replace(/_/g, ' ');
+  const hoverText = document.createElement('div');
+  hoverText.className = 'gallery-hover-text';
+  hoverText.textContent = 'Click for details';
+  container.appendChild(img);
+  container.appendChild(hoverText);
+  container.addEventListener('click', () => {
+    detailImg.src = img.src;
+    detailImg.alt = img.alt;
+    detailDesc.textContent = dogDescriptions[filename] || '';
+    imageDetailSection.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+  dogGallery.appendChild(container);
+});
+const githubUsername = 'Eazy-A';
+const githubReposContainer = document.getElementById('github-repos');
+
+fetch(`https://api.github.com/users/${githubUsername}/repos`)
+    .then(response => response.json())
+    .then(repos => {
+      githubReposContainer.innerHTML = '';
+      repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+      const newestRepo = {
+        name: 'Web-design',
+        html_url: 'https://github.com/Eazy-A/Web-design',
+        description: 'Latest web design project',
+      };
+      if (!repos.some(r => r.name === 'Web-design')) {
+        repos.unshift(newestRepo);
+      }
+      repos.forEach(repo => {
+        const card = document.createElement('div');
+        card.className = 'repo-card';
+        card.innerHTML = `
+        <a href="${repo.html_url}" target="_blank" rel="noopener" style="font-weight:bold; color:#4f8cff; text-decoration:none; font-size:1.1rem;">${repo.name}</a>
+        <p style="margin:0.5rem 0 0 0; color:#333;">${repo.description ? repo.description : ''}</p>
+      `;
+        githubReposContainer.appendChild(card);
+      });
+      if (repos.length === 0) {
+        githubReposContainer.innerHTML = '<p>No repositories found.</p>';
+      }
+    })
+    .catch(() => {
+      githubReposContainer.innerHTML = '<p>Could not load repositories.</p>';
+      const card = document.createElement('div');
+      card.className = 'repo-card';
+      card.innerHTML = `
+        <a href="https://github.com/Eazy-A/Web-design" target="_blank" rel="noopener" style="font-weight:bold; color:#4f8cff; text-decoration:none; font-size:1.1rem;">Web-design</a>
+        <p style="margin:0.5rem 0 0 0; color:#333;">Latest web design project</p>
+      `;
+      githubReposContainer.appendChild(card);
+    });
+// spotify
+const spotifyEmbed = document.getElementById('spotify-embed');
+const spotifyPlaylists = [
+  {
+    title: 'classical asf',
+    url: 'https://open.spotify.com/embed/playlist/07A4urNoMiGUDMHOVQtUDZ',
+  },
+  {
+    title: 'turn up',
+    url: 'https://open.spotify.com/embed/playlist/34ZCkc9nhjQwrZtR8K8u0b',
+  },
+  {
+    title: 'realMusic',
+    url: 'https://open.spotify.com/embed/playlist/5qHg6oKvOkhjQzxGeUSzHI',
+  },
+  {
+    title: 'opium',
+    url: 'https://open.spotify.com/embed/playlist/46tU78K2CYyUDGnWAkp48g',
+  },
+  {
+    title: 'thrifted',
+    url: 'https://open.spotify.com/embed/playlist/1hbRabzfSyS1b6H5Pts5Pj',
+  },
+  {
+    title: 'dripActivator 💧',
+    url: 'https://open.spotify.com/embed/playlist/5xHPLVPz0YhT7VbZuMjNTH',
+  },
+];
+spotifyEmbed.innerHTML = `<div class="spotify-playlists-grid">` +
+  spotifyPlaylists.map(pl => `
+    <div class="spotify-playlist-block">
+      <div class="spotify-playlist-title">${pl.title}</div>
+      <iframe style="border-radius:12px" src="${pl.url}" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  `).join('') +
+  `</div>`;
+// back to top button
+const backToTopBtn = document.getElementById('backToTopBtn');
+
+const navLinks = document.querySelectorAll('.nav-links a');
+const logo = document.querySelector('.logo');
+if (logo) {
+  logo.style.cursor = 'pointer';
+  logo.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f7f8fa;
-    color: #222;
-    line-height: 1.6;
-}
-nav {
-    background: #222;
-    color: #fff;
-    padding: 1rem 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.nav-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-}
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.main-logo {
-    height: 36px;
-    width: 36px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1rem;
-        transition: color 0.2s;
+navLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href.startsWith('#')) {
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const yOffset = -60; // Offset in px
+        const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
-}
-.nav-links a:hover {
-    color: #5454ed;
-    font-weight: bold;
-}
-.nav-links a.active {
-    color: #1db954;
-    font-weight: bold;
-    border-bottom: 2px solid #1db954;
-}
-section {
-    max-width: 900px;
-    margin: 2.5rem auto;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-    padding: 2rem;
-}
-h2 {
-    margin-bottom: 1rem;
-    color: #4f8cff;
+  });
+});
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    backToTopBtn.style.display = 'block';
+  } else {
+    backToTopBtn.style.display = 'none';
+  }
+  const sections = document.querySelectorAll('section[id]');
+  let currentSection = '';
+  const scrollY = window.pageYOffset;
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 80;
+    const sectionHeight = section.offsetHeight;
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      currentSection = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + currentSection) {
+      link.classList.add('active');
+    }
+  });
+};
+backToTopBtn.onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+const bioSection = document.getElementById('biography');
+if (bioSection) {
+  const bioImg = bioSection.querySelector('.bio-img');
+  if (bioImg) {
+    const container = document.createElement('div');
+    container.className = 'gallery-img-container';
+    const hoverText = document.createElement('div');
+    hoverText.className = 'gallery-hover-text';
+    hoverText.textContent = 'Click for details';
+    bioImg.parentNode.insertBefore(container, bioImg);
+    container.appendChild(bioImg);
+    container.appendChild(hoverText);
+    container.addEventListener('click', () => {
+      detailImg.src = bioImg.src;
+      detailImg.alt = bioImg.alt;
+      detailDesc.textContent = 'I was born in 2005 in Stip, a town in eastern Macedonia.';
+      imageDetailSection.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  }
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-    position: relative;
-}
-.gallery-img-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-}
-.gallery-img-container img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.2s;
-    display: block;
-}
-.gallery-img-container:hover img {
-    transform: scale(1.04);
-    filter: brightness(0.7);
-}
-.gallery-hover-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    background: rgba(30,34,44,0.7);
-    padding: 0.5rem 1.2rem;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    text-align: center;
-    letter-spacing: 1px;
-}
-.gallery-img-container:hover .gallery-hover-text {
-    opacity: 1;
-}
-#github {
-    background: #161b22;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px rgba(20,23,28,0.18);
-    padding: 2rem 2.5rem 2.5rem 2.5rem;
-    margin-bottom: 2.5rem;
-}
-.github-logo {
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(20,23,28,0.18);
-    display: block;
-    margin: 0 auto 1.2rem auto;
-    max-width: 56px;
-    width: 100%;
-    height: auto;
-    padding: 6px;
-    border: 1.5px solid #eaeaea;
-    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-    cursor: pointer;
-}
-.github-logo:hover {
-    transform: translateY(-4px) scale(1.08);
-    box-shadow: 0 4px 16px rgba(88,166,255,0.18);
-    border-color: #58a6ff;
-}
-#github-repos {
-    background: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-.repo-card {
-    background: #22272e;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 1px 4px rgba(20,23,28,0.10);
-    color: #c9d1d9;
-    border: 1px solid #30363d;
-    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-}
-.repo-card:hover {
-    transform: translateY(-6px) scale(1.03);
-    border-color: #58a6ff;
-    box-shadow: 0 4px 24px rgba(88,166,255,0.13);
-    z-index: 2;
-}
-.repo-card a {
-    color: #58a6ff !important;
-}
-.repo-card p {
-    color: #8b949e !important;
-}
-#spotify-embed iframe {
-    width: 100%;
-    min-height: 80px;
-    border-radius: 8px;
-    margin-top: 1rem;
-}
-@media (max-width: 600px) {
-    .nav-content {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0 1rem;
-    }
-    section {
-        padding: 1rem;
-    }
-    .gallery img {
-        height: 120px;
-    }
-}
-@media (max-width: 700px) {
-    #github {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
-
-#backToTopBtn {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 100;
-    background: #4f8cff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    cursor: pointer;
-    opacity: 0.8;
-    transition: background 0.2s, opacity 0.2s, transform 0.2s;
-    display: none;
-}
-#backToTopBtn:hover {
-    background: #222;
-    opacity: 1;
-    transform: scale(1.08);
-}
-.edu-imgs-flex {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-    width: 100%;
-}
-.edu-imgs-flex .gallery-img-container {
-    flex: 1 1 0;
-    max-width: none;
-}
-.edu-img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4/3;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-    margin: 0;
-}
-@media (max-width: 800px) {
-    .edu-imgs-flex {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-    .edu-imgs-flex .gallery-img-container {
-        max-width: 100%;
-    }
-}
-.top-portrait {
-    display: block;
-    margin: 2rem auto 1.5rem auto;
-    max-width: 180px;
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
-    object-fit: cover;
-    background: #fff;
-}
-#image-detail {
-    position: fixed;
-    top: 40px;
-    left: 340px;
-    width: 50vw;
-    height: 80vh;
-    background: rgba(30, 34, 44, 0.97);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: 0;
-    opacity: 0;
-    transform: scale(0.96);
-}
-#image-detail[style*="display: flex"] {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-#image-detail img {
-    max-width: 90vw;
-    max-height: 60vh;
-    border-radius: 16px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.25);
-    margin-bottom: 1.5rem;
-    background: #fff;
-    display: block;
-}
-#detail-desc {
-    color: #fff;
-    font-size: 1rem;
-    text-align: center;
-    max-width: 320px;
-    margin: 0 auto 1.2rem auto;
-    font-weight: 500;
-    background: rgba(30,34,44,0.85);
-    padding: 0.7rem 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-}
-#close-detail {
-    position: absolute;
-    top: 32px;
-    right: 48px;
-    background: #4f8cff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 2rem;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    transition: background 0.2s;
-    z-index: 2100;
-}
-#close-detail:hover {
-    background: #222;
-}
-@media (max-width: 600px) {
-    #image-detail {
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    #image-detail img {
-        max-width: 98vw;
-        max-height: 40vh;
-    }
-    #close-detail {
-        top: 16px;
-        right: 16px;
-    }
-}
-/*.shtip-iframe-container {*/
-/*    width: 100%;*/
-/*    max-width: 900px;*/
-/*    margin: 2rem auto 0 auto;*/
-/*    border-radius: 12px;*/
-/*    box-shadow: 0 2px 16px rgba(0,0,0,0.10);*/
-/*}*/
-/*.shtip-iframe-container iframe {*/
-/*    width: 100%;*/
-/*    min-height: 320px;*/
-/*    border: none;*/
-/*    display: block;*/
-/*}*/
-.spotify-playlists-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-.spotify-playlist-block {
-    margin-bottom: 0;
-    background: #f7f8fa;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
-}
-.spotify-playlist-block:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 4px 24px rgba(30,215,96,0.13);
-    background: #fff;
-    z-index: 2;
-}
-.spotify-playlist-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #1db954;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    letter-spacing: 1px;
-}
-footer{
-    display: flex;
-    justify-content: center;
-}
-.bio-img {
-    display: block;
-    max-width: 320px;
-    width: 100%;
-    height: auto;
-    margin: 1.5rem auto 0 auto;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-}
-.bio-flex {
-    display: flex;
-    align-items: flex-start;
-    gap: 2.5rem;
-    max-width: 1100px;
-    margin: 2.5rem auto;
-    padding: 0 1rem;
-    .top-portrait {
-        flex: 0 0 220px;
-        max-width: 220px;
-        margin: 0;
-    }
-    #biography {
-        flex: 1 1 0;
-        margin: 0;
-    }
-}
-@media (max-width: 800px) {
-    .bio-flex {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        .top-portrait {
-            max-width: 180px;
-        }
-    }
-}
-#detail-img.finki-detail {
-    width: 100%;
-    max-width: 500px;
-    max-height: 60vh;
-    object-fit: contain;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.25);
-    margin-bottom: 1.5rem;
-    display: block;
-}
-.spotify-logo {
-    display: block;
-    margin: 0 auto 1.2rem auto;
-    max-width: 64px;
-    width: 100%;
-    height: auto;
-    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-    cursor: pointer;
-}
-.spotify-logo:hover {
-    transform: translateY(-4px) scale(1.08);
-    border-color: #1db954;
-    box-shadow: 0 0 0 0 transparent;
-    background: radial-gradient(circle at 50% 50%, rgba(30,215,96,0.25) 0%, rgba(30,215,96,0.10) 60%, transparent 100%) #fff;
-}
-.ig-icon {
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-    margin-right: 6px;
-    border-radius: 5px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    transition: transform 0.16s;
-}
-#contact a {
-    color: #222;
-    text-decoration: none;
-    transition: color 0.16s, text-decoration 0.16s;
-}
-#contact a:hover {
-    color: #4f8cff;
-    text-decoration: underline;
+const eduSection = document.getElementById('education');
+if (eduSection) {
+  const eduImgs = eduSection.querySelectorAll('.edu-img');
+  const eduDescriptions = [
+    'I finished Slavco Stojmenski high school. In Macedonia this type of high school is called gymnasium',
+    'A picture of me and my classmates at the end of year 3',
+    'With classmates chillin\'',
+      'And recently I\'ve finished my first year of undergraduate studies at Finki'
+  ];
+  eduImgs.forEach((img, idx) => {
+    const container = document.createElement('div');
+    container.className = 'gallery-img-container';
+    const hoverText = document.createElement('div');
+    hoverText.className = 'gallery-hover-text';
+    hoverText.textContent = 'Click for details';
+    img.parentNode.insertBefore(container, img);
+    container.appendChild(img);
+    container.appendChild(hoverText);
+    container.addEventListener('click', () => {
+      detailImg.src = img.src;
+      detailImg.alt = img.alt;
+      detailDesc.textContent = eduDescriptions[idx] || '';
+      if (img.src.includes('finkipic.png')) {
+        detailImg.classList.add('finki-detail');
+      } else {
+        detailImg.classList.remove('finki-detail');
+      }
+      imageDetailSection.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
 }
